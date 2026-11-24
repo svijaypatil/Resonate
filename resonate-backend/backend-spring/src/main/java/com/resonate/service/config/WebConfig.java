@@ -29,12 +29,12 @@ public class WebConfig {
     }
 
     @Bean
-    public WebClient fastApiWebClient(@Value("${fastapi.Baseurl}") String baseUrl, WebClient.Builder builder) {
+    public WebClient fastApiWebClient(@Value("${fastapi.base-url}") String baseUrl, WebClient.Builder builder) {
         return builder.baseUrl(baseUrl).build();
     }
 
     @Bean
-    public WebClient supabaseWebClient(@Value("${supabase.Baseurl}") String baseUrl, @Value("${supabase.apiKey}") String apiKey, WebClient.Builder builder) {
+    public WebClient supabaseWebClient(@Value("${supabase.base-url}") String baseUrl, @Value("${supabase.api-key}") String apiKey, WebClient.Builder builder) {
         return builder.baseUrl(baseUrl + "/rest/v1/rpc/")
                 .defaultHeader("apikey", apiKey)
                 .defaultHeader("Authorization", "Bearer " + apiKey)

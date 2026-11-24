@@ -1,0 +1,61 @@
+management:
+    endpoints:
+        web:
+            exposure:
+                include: health,info,metrics
+
+spring:
+    application:
+        name: resonate-backend
+
+    # Clerk Authentication (JWT)
+    security:
+        oauth2:
+            resourceserver:
+                jwt:
+                    issuer-uri: https://[YOUR-CLERK-DOMAIN].clerk.accounts.dev
+
+    # Supabase Database (PostgreSQL)
+    # Supbase -> Project -> Connect -> Direct Connection -> Session pooler -> JDBC
+    datasource:
+        url: jdbc:postgresql://YOUR-HOST-POOLER.supabase.com:5432/postgres
+        username: postgres.user
+        password: YOUR-PASSWORD
+        driver-class-name: org.postgresql.Driver
+
+# JPA / Hibernate Settings
+    jpa:
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+                type:
+                    '[json_format_mapper]': jackson
+                '[format_sql]': true
+
+
+# Security: Data At Rest Encryption
+# Key must be 16, 24, or 32 characters for AES
+encryption:
+    key: YOUR-ENCRYPTION-KEY
+    algorithm: AES
+
+# Supabase S3 Storage Configuration
+# Found in Supabase -> Storage
+supabase:
+    s3:
+        endpoint: https://<your-project-id>.storage.supabase.co/storage/v1/s3
+        region: YOUR-REGION
+        access-key: YOUR-ACCESS-KEY
+        secret-key: YOUR-SECRET-KEY
+        bucket: YOUR-BUCKET-NAME
+
+    # Supabase REST/RPC Configuration
+    # base-url example: https://xyzabc.supabase.co
+    # api-key: Use the 'anon' or 'service_role' key
+    base-url: https://<your-project-id>.supabase.co
+    api-key: YOUR-API-KEY
+
+# FastAPI AI Microservice URL
+# Default is http://localhost:8000 for local development
+fastapi:
+    base-url: http://localhost:8000

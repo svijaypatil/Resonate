@@ -56,4 +56,4 @@ resonate-backend/Backend-ML/**/*.pyc
 resonate-backend/Backend-ML/.env
 
 # Project Mangement
-TODO.txt
+TODO.md
